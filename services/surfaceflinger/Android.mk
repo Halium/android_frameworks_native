@@ -198,48 +198,48 @@ LOCAL_CFLAGS += -Wall -Werror -Wunused -Wunreachable-code
 
 include $(BUILD_SHARED_LIBRARY)
 
-###############################################################
-# build surfaceflinger's executable
-include $(CLEAR_VARS)
+################################################################
+## build surfaceflinger's executable
+#include $(CLEAR_VARS)
 
-LOCAL_CLANG := true
+#LOCAL_CLANG := true
 
-LOCAL_LDFLAGS := -Wl,--version-script,art/sigchainlib/version-script.txt -Wl,--export-dynamic
-LOCAL_CFLAGS := -DLOG_TAG=\"SurfaceFlinger\"
-LOCAL_CPPFLAGS := -std=c++14
+#LOCAL_LDFLAGS := -Wl,--version-script,art/sigchainlib/version-script.txt -Wl,--export-dynamic
+#LOCAL_CFLAGS := -DLOG_TAG=\"SurfaceFlinger\"
+#LOCAL_CPPFLAGS := -std=c++14
 
-LOCAL_INIT_RC := surfaceflinger.rc
+#LOCAL_INIT_RC := surfaceflinger.rc
 
-ifneq ($(ENABLE_CPUSETS),)
-    LOCAL_CFLAGS += -DENABLE_CPUSETS
-endif
+#ifneq ($(ENABLE_CPUSETS),)
+#    LOCAL_CFLAGS += -DENABLE_CPUSETS
+#endif
 
-ifeq ($(TARGET_USES_HWC2),true)
-    LOCAL_CFLAGS += -DUSE_HWC2
-endif
+#ifeq ($(TARGET_USES_HWC2),true)
+#    LOCAL_CFLAGS += -DUSE_HWC2
+#endif
 
-LOCAL_SRC_FILES := \
-    main_surfaceflinger.cpp
+#LOCAL_SRC_FILES := \
+#    main_surfaceflinger.cpp
 
-LOCAL_SHARED_LIBRARIES := \
-    libsurfaceflinger \
-    libcutils \
-    liblog \
-    libbinder \
-    libutils \
-    libdl
+#LOCAL_SHARED_LIBRARIES := \
+#    libsurfaceflinger \
+#    libcutils \
+#    liblog \
+#    libbinder \
+#    libutils \
+#    libdl
 
-LOCAL_WHOLE_STATIC_LIBRARIES := libsigchain
+#LOCAL_WHOLE_STATIC_LIBRARIES := libsigchain
 
-LOCAL_MODULE := surfaceflinger
+#LOCAL_MODULE := surfaceflinger
 
-ifdef TARGET_32_BIT_SURFACEFLINGER
-LOCAL_32_BIT_ONLY := true
-endif
+#ifdef TARGET_32_BIT_SURFACEFLINGER
+#LOCAL_32_BIT_ONLY := true
+#endif
 
-LOCAL_CFLAGS += -Wall -Werror -Wunused -Wunreachable-code
+#LOCAL_CFLAGS += -Wall -Werror -Wunused -Wunreachable-code
 
-include $(BUILD_EXECUTABLE)
+#include $(BUILD_EXECUTABLE)
 
 ###############################################################
 # uses jni which may not be available in PDK
