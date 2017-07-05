@@ -223,9 +223,9 @@ int do_add_service(struct binder_state *bs,
         return -1;
 
     if (!svc_can_register(s, len, spid, uid)) {
-        ALOGE("add_service('%s',%x) uid=%d - PERMISSION DENIED\n",
+        ALOGI("add_service('%s',%x) uid=%d - Permission override for halium\n",
              str8(s, len), handle, uid);
-        return -1;
+        //return -1;
     }
 
     si = find_svc(s, len);
