@@ -34,6 +34,9 @@ namespace android {
 #undef GL_EXTENSION_LIST
 #undef GET_TLS
 
+
+// XXX - Inhibit optimized jumps through bionic's TLS slot
+#if 0
 #if defined(__arm__)
 
     #define GET_TLS(reg) "mrc p15, 0, " #reg ", c13, c0, 3 \n"
@@ -187,6 +190,7 @@ namespace android {
                 :                                                   \
             );
 
+#endif
 #endif
 
 #if defined(CALL_GL_EXTENSION_API)
