@@ -241,8 +241,10 @@ void gl_noop() {
 // ----------------------------------------------------------------------------
 
 void setGlThreadSpecific(gl_hooks_t const *value) {
-    gl_hooks_t const * volatile * tls_hooks = get_tls_hooks();
-    tls_hooks[TLS_SLOT_OPENGL_API] = value;
+    // XXX - Replace bionic's dedicated TLS slot with pthread_setspecific
+    //gl_hooks_t const * volatile * tls_hooks = get_tls_hooks();
+    //tls_hooks[TLS_SLOT_OPENGL_API] = value;
+    pthread_setspecific(TLS_SLOT_OPENGL_API, (const void *) value);
 }
 
 // ----------------------------------------------------------------------------

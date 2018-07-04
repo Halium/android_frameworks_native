@@ -580,7 +580,9 @@ private:
 // state
 // ----------------------------------------------------------------------------
 
-#ifdef __ANDROID__
+// XXX - disable the use of bionic's dedicated slot and fall back to
+// pthread_setspecific.
+#ifdef __ANDROID__ && XXX_DISABLED
     // We have a dedicated TLS slot in bionic
     inline void setGlThreadSpecific(ogles_context_t *value) {
         __get_tls()[TLS_SLOT_OPENGL] = value;

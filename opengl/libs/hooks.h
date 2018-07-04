@@ -34,7 +34,9 @@
 #include <GLES3/gl32.h>
 
 // set to 1 for debugging
-#define USE_SLOW_BINDING    0
+// XXX - Enable USE_SLOW_BINDING to use traditional dlsym jumps instead
+// of using the path through the TLS hook.
+#define USE_SLOW_BINDING    1
 
 #undef NELEM
 #define NELEM(x)            (sizeof(x)/sizeof(*(x)))
@@ -76,6 +78,7 @@ struct gl_hooks_t {
 
 EGLAPI void setGlThreadSpecific(gl_hooks_t const *value);
 
+#if 0
 // We have a dedicated TLS slot in bionic
 inline gl_hooks_t const * volatile * get_tls_hooks() {
     volatile void *tls_base = __get_tls();
@@ -83,11 +86,14 @@ inline gl_hooks_t const * volatile * get_tls_hooks() {
             reinterpret_cast<gl_hooks_t const * volatile *>(tls_base);
     return tls_hooks;
 }
+#endif
 
 inline EGLAPI gl_hooks_t const* getGlThreadSpecific() {
-    gl_hooks_t const * volatile * tls_hooks = get_tls_hooks();
-    gl_hooks_t const* hooks = tls_hooks[TLS_SLOT_OPENGL_API];
-    return hooks;
+    // XXX - Replace bionic's dedicated TLS slot with pthread_getspecific
+    //gl_hooks_t const * volatile * tls_hooks = get_tls_hooks();
+    //gl_hooks_t const* hooks = tls_hooks[TLS_SLOT_OPENGL_API];
+    //return hooks;
+    return (gl_hooks_t const *) pthread_getspecific(TLS_SLOT_OPENGL_API);
 }
 
 // ----------------------------------------------------------------------------
