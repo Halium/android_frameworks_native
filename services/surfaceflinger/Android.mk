@@ -111,52 +111,52 @@ include $(BUILD_SHARED_LIBRARY)
 
 ###############################################################
 # build surfaceflinger's executable
-include $(CLEAR_VARS)
+#include $(CLEAR_VARS)
 
-LOCAL_CLANG := true
+#LOCAL_CLANG := true
 
-LOCAL_LDFLAGS_32 := -Wl,--version-script,art/sigchainlib/version-script32.txt -Wl,--export-dynamic
-LOCAL_LDFLAGS_64 := -Wl,--version-script,art/sigchainlib/version-script64.txt -Wl,--export-dynamic
-LOCAL_CFLAGS := -DLOG_TAG=\"SurfaceFlinger\"
+#LOCAL_LDFLAGS_32 := -Wl,--version-script,art/sigchainlib/version-script32.txt -Wl,--export-dynamic
+#LOCAL_LDFLAGS_64 := -Wl,--version-script,art/sigchainlib/version-script64.txt -Wl,--export-dynamic
+#LOCAL_CFLAGS := -DLOG_TAG=\"SurfaceFlinger\"
 
-LOCAL_INIT_RC := surfaceflinger.rc
+#LOCAL_INIT_RC := surfaceflinger.rc
 
-ifeq ($(TARGET_USES_HWC2),true)
-    LOCAL_CFLAGS += -DUSE_HWC2
-endif
+#ifeq ($(TARGET_USES_HWC2),true)
+#    LOCAL_CFLAGS += -DUSE_HWC2
+#endif
 
-LOCAL_SRC_FILES := \
-    main_surfaceflinger.cpp
+#LOCAL_SRC_FILES := \
+#    main_surfaceflinger.cpp
 
-LOCAL_SHARED_LIBRARIES := \
-    android.frameworks.displayservice@1.0 \
-    android.hardware.configstore@1.0 \
-    android.hardware.configstore-utils \
-    android.hardware.graphics.allocator@2.0 \
-    libsurfaceflinger \
-    libcutils \
-    libdisplayservicehidl \
-    liblog \
-    libbinder \
-    libhidlbase \
-    libhidltransport \
-    libutils \
-    libui \
-    libgui \
-    libdl
+#LOCAL_SHARED_LIBRARIES := \
+#    android.frameworks.displayservice@1.0 \
+#    android.hardware.configstore@1.0 \
+#    android.hardware.configstore-utils \
+#    android.hardware.graphics.allocator@2.0 \
+#    libsurfaceflinger \
+#    libcutils \
+#    libdisplayservicehidl \
+#    liblog \
+#    libbinder \
+#    libhidlbase \
+#    libhidltransport \
+#    libutils \
+#    libui \
+#    libgui \
+#    libdl
 
-LOCAL_WHOLE_STATIC_LIBRARIES := libsigchain
-LOCAL_STATIC_LIBRARIES := libtrace_proto
+#LOCAL_WHOLE_STATIC_LIBRARIES := libsigchain
+#LOCAL_STATIC_LIBRARIES := libtrace_proto
 
-LOCAL_MODULE := surfaceflinger
+#LOCAL_MODULE := surfaceflinger
 
-ifdef TARGET_32_BIT_SURFACEFLINGER
-LOCAL_32_BIT_ONLY := true
-endif
+#ifdef TARGET_32_BIT_SURFACEFLINGER
+#LOCAL_32_BIT_ONLY := true
+#endif
 
-LOCAL_CFLAGS += -Wall -Werror -Wunused -Wunreachable-code
+#LOCAL_CFLAGS += -Wall -Werror -Wunused -Wunreachable-code
 
-include $(BUILD_EXECUTABLE)
+#include $(BUILD_EXECUTABLE)
 
 ###############################################################
 # uses jni which may not be available in PDK
